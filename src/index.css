@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+} */
+
+
+#root {
+
+  /* background-co  background-color: #15202B;lor: aquamarine; */
+  /* box-sizing: border-box; */
+  text-align: center;
+   background-color: #15202B; 
+}
+
+p, ul, li{
+  /* color: rgb(255, 255, 255); */
+}
+
+
+.color-grey-white{
+
+}
+
+
+.color-grey-ccc{
+/* background-color: #CCCCCC; */
+}
+
+.color-grey-mid{
+  /* background-color: #6C757D; */
+}
+
+.color-grey-dark{
+/* background-color: #343A40; */
+  /* background-color: #da6e16;  */
+}
+
+
+.test{
+background-color: blue;
+background-color: yellow;
+background-color: green;
+background-color: red;
+
+
+}
+
+
+
+.App {
+  max-width: 600px;
+  text-align: center;
+  margin: auto;
+  
+}
+
+
+nav{
+  
+}
+
+nav ul {
+  padding: 5px;
+}
+
+nav ul li{
+  padding: 5px;
+  display: inline-block;
+}
+
+
+.Tweet-List {
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.Tweet-List ul{
+  padding: 0;
+  list-style-type: none;
+}
+
+.Tweet-List li{
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+}
