@@ -3,7 +3,7 @@
 
 
 
-function WriteNote({  
+function WriteNote2({  
   notemainMassage,
   addNoteClick, 
   setTextArea ,
@@ -43,7 +43,8 @@ function WriteNote({
           className="form-control rounded   border border-2  bg-transparent"
           id="textbody" placeholder="Write your note.." >
           </textarea>
-   
+          
+          <p className="too-long rounded  ps-3 pe-3 pt-1 pb-1">The tweet can't contain more then 140 chars.</p>  
       <button
           disabled={buttonDisabled} 
 
@@ -58,4 +59,4 @@ function WriteNote({
   );
   
 }
-export default WriteNote;
+export default WriteNote2;

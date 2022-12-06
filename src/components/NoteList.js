@@ -1,13 +1,14 @@
 import PopUpModal from "./PopUpModal";
-
+// import errorMessages from "./errorMessages";
 function NoteList({ notes, deleteNote , setinputText ,inputText,  ChangeNoteClick , setTextArea ,textArea }) {
  
  
   return (
-    <div className="NoteList  m-2 ">
+    <div className="NoteList  ">
       <div className="note-pack ">
         {notes.map((note) => (
-          <div className="">
+          <div className="bg-color-grey-dark   rounded">
+             {/* <errorMessages  /> */}
                <PopUpModal  className="PopUpModal"
                notemainMassage={note.mainMassage}
                noteTitle={note.title}
