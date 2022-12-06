@@ -3,23 +3,25 @@ import uuid from "react-uuid";
 import "./App.css";
 import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
+// import ServerContact from "./components/ServerContact";
 
+ 
 function App() {
   const [toggle, setToggle] = useState(true);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [textArea, setTextArea] = useState("");
   const [inputText, setinputText] = useState("");
-  // const [notes, setNotes] = useState([]);
+  const [notes, setNotes] = useState([]);
 
   //  הפתקים עוברים לשמירה מקומית
-  const [notes, setNotes] = useState(() => {
-    const notesSaved = localStorage.getItem("notes");
-    return notesSaved ? JSON.parse(notesSaved) : [];
-  });
+  // const [notes, setNotes] = useState(() => {
+  //   const notesSaved = localStorage.getItem("notes");
+  //   return notesSaved ? JSON.parse(notesSaved) : [];
+  // });
 
-  useEffect(() => {
-    localStorage.setItem("notes", JSON.stringify(notes));
-  }, [notes]);
+  // useEffect(() => {
+  //   localStorage.setItem("notes", JSON.stringify(notes));
+  // }, [notes]);
 
   function NoTextNote() {
     window.confirm("note’s text is mandatory");
@@ -70,7 +72,16 @@ function App() {
 
     setTextArea("");
     setinputText("");
-    setNotes([newNoteAfterClick, ...notes]); // מכניס את החדש לתוך רשימת הישנים
+
+
+
+
+
+
+    
+         // מכניס את החדש לתוך רשימת הישנים
+
+    // setNotes([newNoteAfterClick, ...notes]);
     // addToLoacal( );
   };
 
@@ -97,6 +108,11 @@ function App() {
   return (
     <div className="App  ">
       <div className="container  ">
+
+
+        {/* <ServerContact/> */}
+
+
         <WriteNote
           className="  "
           toggle={toggle}
@@ -111,8 +127,15 @@ function App() {
           // setinputText={setinputText}
         />
 
+        {/* <ServerContact
+          notes={notes}
+          setTextArea={setTextArea}
+          textArea={textArea}
+        /> */}
+          
         <NoteList
           notes={notes}
+          setNotes={setNotes}
           // deleteNote={deleteNote}
           // setinputText={setinputText}
           // inputText={inputText}
