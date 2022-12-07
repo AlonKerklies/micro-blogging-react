@@ -7,7 +7,7 @@ import { BrowserRouter,Route,useNavigate,Routes, Link, NavLink  } from "react-ro
 
 function App() {
   
- 
+
  
   return (
     <div className="">
@@ -19,8 +19,8 @@ function App() {
 to="/Profile"  >Profile</NavLink></li>
 </ul>   
            <Routes>
-            <Route path="/" element={<Home /> }            /> 
-            <Route path="/Profile" element={<Profile /> }              />     
+            <Route path="/" element={<Home /> }      /> 
+            <Route path="/Profile" element={<Profile   /> }    />     
            </Routes>
 
       </div>

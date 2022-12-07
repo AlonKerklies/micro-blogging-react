@@ -5,8 +5,11 @@ import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import axios from "axios";
 
-function Home() {
+function Home({    }) {
+
   console.log( "start app page");
+ 
+
   const [toggleErrorNote, setToggleErrorNote] = useState(true);
   const [errorText, setErrorText] = useState("");
   const [toggleSpinner, setToggleSpinner] = useState(false);
@@ -22,11 +25,7 @@ function Home() {
     window.confirm("note’s text is mandatory");
   }
 
- 
-
- 
-
-  const currentDate = new Date();
+const currentDate = new Date();
 
 const addNoteClick = () => {
     if (textArea.trim() === "") {
@@ -34,8 +33,7 @@ const addNoteClick = () => {
     }
     else {
     }
-    
-    
+     
     setNewNoteAfterClick ( {
     content: textArea   ,
     userName:   "tweet factory"  ,
@@ -43,14 +41,11 @@ const addNoteClick = () => {
  
     id: uuid()
   } )
-
 };
-
 
  useEffect(() => {
    handleSubmit();
   },[newNoteAfterClick]);
-
 
 const handleSubmit = () => {
 
@@ -72,11 +67,8 @@ console.log( error.response.data.message);
  
 });
   
-      console.log( "end app page");
+ console.log( "end app page");
 };
-
-
-
 
 
   return (
@@ -86,7 +78,6 @@ console.log( error.response.data.message);
           className="  "
           errorText={errorText}
           toggleErrorNote={toggleErrorNote}
-          // setToggleErrorNote={setToggleErrorNote}
           setToggleSpinner={setToggleSpinner}
           toggleSpinner={toggleSpinner}
           addNoteClick={addNoteClick}

@@ -47,30 +47,6 @@ font-family: 'Roboto', sans-serif;
 }
 
 
- 
-
-
-/*  
-nav-bar-link:link, nav-bar-link:visited {
-  background-color: #f44336;
-  color: rgb(255, 255, 255);
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
-
-nav-bar-link:hover, nav-bar-link:active {
-  background-color: red;
-  color: rgb(29, 255, 255);
-  font-size: 18px;
-} */
-
-
-
-
-
-
 body {
   background-color: #15202B;
   /* background-color: aquamarine; */
@@ -131,15 +107,34 @@ background-color: #CCCCCC;
 }
 
 .subline-text{
-  font-size: 18px;
+  font-size: 21px;
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-kerning: none;
 }
 
 
+.inputName{
+  color: #6C757D;
+/* height: 61px; */
+/* font-size: 52px; */
+}
 
 
+.inputName:focus{
+  color: #6C757D;
+ 
+}
+
+
+.profilebtn{
+  background-color: #007BFF;
+ float: right;
+ 
+ 
+
+
+}
 
 
 
@@ -163,6 +158,10 @@ background-color: #CCCCCC;
   
 }
  
+
+
+
+
 .too-long{
  color: #721C24;
   background-color: #F8D7DA;
