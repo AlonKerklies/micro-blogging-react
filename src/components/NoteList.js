@@ -4,16 +4,20 @@ import React from "react";
 import uuid from "react-uuid";
 const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
-function NoteList({ noteListFromServer, setNoteListFromServer,   makefetch,
-   }) {
+function NoteList({ noteListFromServer, setNoteListFromServer, makefetch }) {
   console.log("start note map");
+  
 
-// const currentDate = new Date();
-const fetchData = async  () => {
-const {data} = await axios.get(baseURL)
-setNoteListFromServer(data.tweets);
-}
+const fetchData = () => {
+axios.get(baseURL).then(({ data }) => setNoteListFromServer(data.tweets))}
+ 
 
+// const fetchData = async  () => {
+// const {data} = await
+//  axios.get(baseURL)
+// setNoteListFromServer(data.tweets);
+// }
+ 
   useEffect(() => {
     fetchData();
   },[makefetch]);
@@ -32,33 +36,7 @@ setNoteListFromServer(data.tweets);
           </div>     
         ))}
       </ >
-    
   );   
-}
+} console.log("end note map");
 export default NoteList;
-
-
-
-
-  // React.useEffect(() => {
-  //   axios.get(baseURL).then((response) => {
-  //     setGetFromUrl(response.data);
-  //     //   console.log(response.data.tweets[0].content  );
-  //       // for (let i = 0; i < response.data.tweets.length ; i++) {  
-  //        for (let i = 0; i < 8 ; i++) {    
-  //           //  console.log(response.data.tweets[i].date  );
-  //            const newNoteFromServer = {
-  //             title:       response.data.tweets[i].userName  ,
-  //             mainMassage: response.data.tweets[i].content ,
-  //             noteDate:    response.data.tweets[i].date ,     };
-  //             noteListFromServer.push(newNoteFromServer);
-  //           }
-  //             console.log(response.data.tweets[0]   );
-              
-  //   } ,[]);
-
-  // },[  makefetch  ]);
-
-  // if (!getFromUrl) return null;
-
 

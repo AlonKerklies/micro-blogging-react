@@ -5,10 +5,8 @@ import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import axios from "axios";
 
-
 function App() {
-  
-
+  console.log( "start app page");
   const [toggleErrorNote, setToggleErrorNote] = useState(true);
   const [errorText, setErrorText] = useState("");
   const [toggleSpinner, setToggleSpinner] = useState(false);
@@ -16,13 +14,7 @@ function App() {
   const [textArea, setTextArea] = useState("");
   const [noteListFromServer, setNoteListFromServer] = useState([]);
   const [makefetch, setMakefetch] = useState([]);
-  
-  // const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
-  
-  
- 
- 
-  console.log( "ddddddddddddddd" + toggleErrorNote);
+  const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
 
   const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
@@ -30,22 +22,9 @@ function App() {
     window.confirm("note’s text is mandatory");
   }
 
-  useEffect(() => {
-    limitTextArealength();
-  });
+ 
 
-  const limitTextArealength = function () {
-    if (textArea.length > 140) {
-      setButtonDisabled(true);
-      setErrorText("The tweet can't contain more then 140 chars.");
-      setToggleErrorNote(true);
-    } else {
-      setButtonDisabled(false);
-      setToggleErrorNote(false);
-    }
-  };
-
-  console.log( 22);
+ 
 
   const currentDate = new Date();
 
@@ -55,82 +34,54 @@ const addNoteClick = () => {
     }
     else {
     }
-  const newNoteAfterClick = {
+    
+    
+    setNewNoteAfterClick ( {
     content: textArea   ,
     userName:   "tweet factory"  ,
-    date: currentDate.toISOString(),
-  // date:  11/11,
+  date: currentDate.toISOString(),
+ 
     id: uuid()
-  };
+  } )
+
+};
 
 
+ useEffect(() => {
+   handleSubmit();
+  },[newNoteAfterClick]);
 
 
-  const handleSubmit = () => {
-    console.log( "handleSubmit");
-    setToggleSpinner(true);
+const handleSubmit = () => {
+
+const isEmpty = Object.keys(newNoteAfterClick).length === 0;
+  if (isEmpty === true) {return}
+    else { {console.log("a new tweet")} }
+
+  setToggleSpinner(true);
 axios.post(baseURL, newNoteAfterClick).then(({ data }) => setMakefetch(data))
 .then(function (response) {
-  setToggleSpinner(false);
+setToggleSpinner(false);
+
+setTextArea("");
 })
 .catch(function (error) {
-  setToggleErrorNote(true);
-  
-  // handleErrorFromServer()
-  console.log( 8);
-
-  console.log( error.response.data.message);
-  console.log( 9);
+  setToggleSpinner(false);
+ 
+console.log( error.response.data.message);
+ 
 });
-        setTextArea("");
+  
+      console.log( "end app page");
 };
- handleSubmit(newNoteAfterClick)
-
-};
-console.log( "before handleErrorFromServer");
-
-// useEffect(() => {
-//   handleSubmit();
-// },[newNoteAfterClick]);
 
 
 
-
-// function handleErrorFromServer() {
-//   console.log( "inside handleErrorFromServer");
-//   console.log( 1);
-//   setToggleSpinner(false);
-//   setErrorText("Error server");
-//   console.log( 2);
-//   setToggleErrorNote(true);
-//   console.log( 3);
-//   setTimeout(delayNote, 3000)
-//   console.log( 4);
-//  function delayNote() {
-//   //  setToggleErrorNote(false);
-//   }
-//   console.log( 5);
-
-// }
-
-
-
-console.log( "after handleErrorFromServer");
-
-
-
-
-
-
-console.log( "sssssss" + toggleErrorNote);
 
 
   return (
-    <div className="App  ">
-      <div className="container  ">
-
-     
-        
+    <div className="App">
+      <div className="container">
         <WriteNote
           className="  "
           errorText={errorText}
@@ -142,6 +93,11 @@ console.log( "sssssss" + toggleErrorNote);
           textArea={textArea}
           setTextArea={setTextArea}
           buttonDisabled={buttonDisabled}
+          setToggleErrorNote={setToggleErrorNote}
+          setErrorText={setErrorText}
+          setButtonDisabled={setButtonDisabled}
+
+
         />
   
         <NoteList
@@ -156,4 +112,7 @@ console.log( "sssssss" + toggleErrorNote);
     </div>
   );
 }
+
+
+
 export default App;

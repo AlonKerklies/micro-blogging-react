@@ -11,7 +11,7 @@ const  Spinner = ( {toggleSpinner})  => {
  
  
 
- <div class="spinner-css spinner-border text-light" role="status">
+ <div className= "spinner-css spinner-border text-light" role="status">
  {/* <span class="sr-only">Loading...</span> */}
 </div> 
 
