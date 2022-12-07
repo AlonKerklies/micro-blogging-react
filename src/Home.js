@@ -36,7 +36,7 @@ const addNoteClick = () => {
      
     setNewNoteAfterClick ( {
     content: textArea   ,
-    userName:   "tweet factory"  ,
+    userName:    localStorage.getItem("userName")    ,
   date: currentDate.toISOString(),
  
     id: uuid()

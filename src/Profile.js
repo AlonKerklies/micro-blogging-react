@@ -9,7 +9,7 @@ function Profile({  }) {
 
   const handleClick = ({ inputName }) => {
     localStorage.setItem("userName", inputName);
-console.log(localStorage.getItem("lastname") )
+console.log(localStorage.getItem("userName") )
 
   };
 
