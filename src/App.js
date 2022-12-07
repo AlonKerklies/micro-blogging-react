@@ -1,115 +1,29 @@
 import { useState, useEffect } from "react";
-import uuid from "react-uuid";
 import "./App.css";
-import WriteNote from "./components/WriteNote";
-import NoteList from "./components/NoteList";
-import axios from "axios";
+import Home from "./Home";
+import Profile from "./Profile";
+import { BrowserRouter,Route,useNavigate,Routes, Link, NavLink  } from "react-router-dom";
+
 
 function App() {
-  console.log( "start app page");
-  const [toggleErrorNote, setToggleErrorNote] = useState(true);
-  const [errorText, setErrorText] = useState("");
-  const [toggleSpinner, setToggleSpinner] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [textArea, setTextArea] = useState("");
-  const [noteListFromServer, setNoteListFromServer] = useState([]);
-  const [makefetch, setMakefetch] = useState([]);
-  const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
-
-  const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
-
-  function NoTextNote() {
-    window.confirm("note’s text is mandatory");
-  }
-
- 
-
- 
-
-  const currentDate = new Date();
-
-const addNoteClick = () => {
-    if (textArea.trim() === "") {
-      return NoTextNote();
-    }
-    else {
-    }
-    
-    
-    setNewNoteAfterClick ( {
-    content: textArea   ,
-    userName:   "tweet factory"  ,
-  date: currentDate.toISOString(),
- 
-    id: uuid()
-  } )
-
-};
-
-
- useEffect(() => {
-   handleSubmit();
-  },[newNoteAfterClick]);
-
-
-const handleSubmit = () => {
-
-const isEmpty = Object.keys(newNoteAfterClick).length === 0;
-  if (isEmpty === true) {return}
-    else { {console.log("a new tweet")} }
-
-  setToggleSpinner(true);
-axios.post(baseURL, newNoteAfterClick).then(({ data }) => setMakefetch(data))
-.then(function (response) {
-setToggleSpinner(false);
-
-setTextArea("");
-})
-.catch(function (error) {
-  setToggleSpinner(false);
- 
-console.log( error.response.data.message);
- 
-});
   
-      console.log( "end app page");
-};
-
-
-
-
-
+ 
+ 
   return (
-    <div className="App">
-      <div className="container">
-        <WriteNote
-          className="  "
-          errorText={errorText}
-          toggleErrorNote={toggleErrorNote}
-          // setToggleErrorNote={setToggleErrorNote}
-          setToggleSpinner={setToggleSpinner}
-          toggleSpinner={toggleSpinner}
-          addNoteClick={addNoteClick}
-          textArea={textArea}
-          setTextArea={setTextArea}
-          buttonDisabled={buttonDisabled}
-          setToggleErrorNote={setToggleErrorNote}
-          setErrorText={setErrorText}
-          setButtonDisabled={setButtonDisabled}
+    <div className="">
 
+<ul className="d-flex justify-content-start   ms-5 me-5  bg-color-grey-dark rounded-bottom   navbar ">
+<li className=" p-2 ps-5"> <NavLink className="nav-bar-link" to="/"    >Home</NavLink></li>
+<li className=" p-2 ps-5" ><NavLink className="nav-bar-link"
 
-        />
-  
-        <NoteList
-        makefetch={makefetch}
-         setMakefetch={setMakefetch}
-          noteListFromServer={noteListFromServer}
-           setNoteListFromServer={setNoteListFromServer}
-          setTextArea={setTextArea}
-          textArea={textArea}
-        />
+to="/Profile"  >Profile</NavLink></li>
+</ul>   
+           <Routes>
+            <Route path="/" element={<Home /> }            /> 
+            <Route path="/Profile" element={<Profile /> }              />     
+           </Routes>
+
       </div>
-    </div>
   );
 }
 

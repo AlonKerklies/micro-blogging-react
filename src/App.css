@@ -1,3 +1,6 @@
+
+ /* -----------------------general------------------- */
+
 p, span,textarea.form-control {
   color: #6C757D;
   font-size: 16px;
@@ -11,6 +14,60 @@ font-family: 'Roboto', sans-serif;
   color: #6C757D;
 
 }
+
+.navbar{
+ 
+  list-style-type: none;
+  color: #ffffff;
+  height : 58px;
+ 
+}
+
+
+
+.nav-bar-link:link {
+  color: #ffffff7e;
+  text-decoration: none;
+}
+
+.nav-bar-link:visited {
+  color: #ffffff7e;
+  text-decoration: none;
+}
+
+.nav-bar-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.nav-bar-link:active {
+  color: #ffffff;
+  
+  text-decoration: underline;
+}
+
+
+ 
+
+
+/*  
+nav-bar-link:link, nav-bar-link:visited {
+  background-color: #f44336;
+  color: rgb(255, 255, 255);
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+nav-bar-link:hover, nav-bar-link:active {
+  background-color: red;
+  color: rgb(29, 255, 255);
+  font-size: 18px;
+} */
+
+
+
 
 
 
@@ -27,40 +84,6 @@ body {
 .App {
   /* background-color: #15202B; */
 }
-
-.noteEdit{
-  position: relative;
-}
- 
-.btn-tweet{
- 
- background-color: #007BFF;
-  position:absolute;
-  bottom : 20px;
-  right:15px;
-  
-}
- 
-.too-long{
- color: #721C24;
-  background-color: #F8D7DA;
-   position:absolute;
-   bottom : 7px;
-   left:15px;
-   
- }
-
-
- .spinner-css{
- 
-  color: #ffffff;
-    position:absolute;
-    margin-left: auto;
-    bottom : 20px;
-    left:15px;
-    
-  }
- 
 
 
 .color-white{
@@ -97,6 +120,69 @@ background-color: #CCCCCC;
 
 
 
+ /* -----------------------PROFILE------------------- */
+
+
+.hedline-text{
+  font-size: 36px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-kerning: none;
+}
+
+.subline-text{
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-kerning: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+ /* -----------------------Home------------------- */
+
+
+.noteEdit{
+  position: relative;
+}
+ 
+.btn-tweet{
+ 
+ background-color: #007BFF;
+  position:absolute;
+  bottom : 20px;
+  right:15px;
+  
+}
+ 
+.too-long{
+ color: #721C24;
+  background-color: #F8D7DA;
+   position:absolute;
+   bottom : 7px;
+   left:15px;
+   
+ }
+
+
+ .spinner-css{
+ 
+  color: #ffffff;
+    position:absolute;
+    margin-left: auto;
+    bottom : 20px;
+    left:15px;
+    
+  }
+ 
 
 textarea{
 border:  #CCCCCC;
@@ -206,3 +292,7 @@ border:  #CCCCCC;
   z-index: 3;
   background-color: #09439b;
 }
+
+
+
+ 
