@@ -3,25 +3,28 @@ import uuid from "react-uuid";
 import "./App.css";
 import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
-// import ServerContact from "./components/ServerContact";
+import axios from "axios";
 
- 
+
 function App() {
-  const [toggle, setToggle] = useState(true);
+  
+
+  const [toggleErrorNote, setToggleErrorNote] = useState(true);
+  const [errorText, setErrorText] = useState("");
+  const [toggleSpinner, setToggleSpinner] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [textArea, setTextArea] = useState("");
-  const [inputText, setinputText] = useState("");
-  const [notes, setNotes] = useState([]);
+  const [noteListFromServer, setNoteListFromServer] = useState([]);
+  const [makefetch, setMakefetch] = useState([]);
+  
+  // const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
+  
+  
+ 
+ 
+  console.log( "ddddddddddddddd" + toggleErrorNote);
 
-  //  הפתקים עוברים לשמירה מקומית
-  // const [notes, setNotes] = useState(() => {
-  //   const notesSaved = localStorage.getItem("notes");
-  //   return notesSaved ? JSON.parse(notesSaved) : [];
-  // });
-
-  // useEffect(() => {
-  //   localStorage.setItem("notes", JSON.stringify(notes));
-  // }, [notes]);
+  const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
   function NoTextNote() {
     window.confirm("note’s text is mandatory");
@@ -32,116 +35,122 @@ function App() {
   });
 
   const limitTextArealength = function () {
-    if (textArea.length > 5) {
+    if (textArea.length > 140) {
       setButtonDisabled(true);
-      setToggle(true);
+      setErrorText("The tweet can't contain more then 140 chars.");
+      setToggleErrorNote(true);
     } else {
       setButtonDisabled(false);
-      setToggle(false);
+      setToggleErrorNote(false);
     }
   };
 
+  console.log( 22);
+
   const currentDate = new Date();
-  const addNoteClick = () => {
+
+const addNoteClick = () => {
     if (textArea.trim() === "") {
       return NoTextNote();
     }
-    // else if  (textArea.length > 11   )
-    //  { console.log("ffggffgg" );}
     else {
     }
-
-    const newNoteAfterClick = {
-      id: uuid(),
-      title: inputText === "" ? "yonatan" : inputText,
-      mainMassage: textArea,
-      noteDate:
-        currentDate.toLocaleString("en-US", {
-          month: "short",
-          day: "numeric",
-        }) +
-        "Th " +
-        currentDate.toLocaleString("en-US", {
-          hour: "numeric",
-          minute: "numeric",
-          hour12: true,
-        }),
-      update: "",
-    };
-    console.log(newNoteAfterClick);
-
-    setTextArea("");
-    setinputText("");
-
-
-
-
-
-
-    
-         // מכניס את החדש לתוך רשימת הישנים
-
-    // setNotes([newNoteAfterClick, ...notes]);
-    // addToLoacal( );
+  const newNoteAfterClick = {
+    content: textArea   ,
+    userName:   "tweet factory"  ,
+    date: currentDate.toISOString(),
+  // date:  11/11,
+    id: uuid()
   };
 
-  // const ChangeNoteClick = (theNoteWithThisID,mainMassage,title) => {
-  // let objIndex;
-  //  setinputText((prevShow) => !prevShow)
-  // objIndex = notes.findIndex((obj => obj.id == theNoteWithThisID));
-  // notes[objIndex].mainMassage = mainMassage
-  // notes[objIndex].title = title
 
-  //  notes[objIndex].update = "Update: " +currentDate.toLocaleString("en-US", {
-  //    month: "short", day: "numeric",}) + "Th " +
-  //   currentDate.toLocaleString("en-US", {
-  //   hour: "numeric", minute: "numeric",  hour12: true, })
-  //   console.log("After update: ", notes[objIndex])
-  // }
 
-  // מוחק כפתור
-  // const deleteNote = (theNoteWithThisID) => {
-  //   ConfirmDelete();
-  //   setNotes(notes.filter((note) => note.id !== theNoteWithThisID));
-  // };
+
+  const handleSubmit = () => {
+    console.log( "handleSubmit");
+    setToggleSpinner(true);
+axios.post(baseURL, newNoteAfterClick).then(({ data }) => setMakefetch(data))
+.then(function (response) {
+  setToggleSpinner(false);
+})
+.catch(function (error) {
+  setToggleErrorNote(true);
+  
+  // handleErrorFromServer()
+  console.log( 8);
+
+  console.log( error.response.data.message);
+  console.log( 9);
+});
+        setTextArea("");
+};
+ handleSubmit(newNoteAfterClick)
+
+};
+console.log( "before handleErrorFromServer");
+
+// useEffect(() => {
+//   handleSubmit();
+// },[newNoteAfterClick]);
+
+
+
+
+// function handleErrorFromServer() {
+//   console.log( "inside handleErrorFromServer");
+//   console.log( 1);
+//   setToggleSpinner(false);
+//   setErrorText("Error server");
+//   console.log( 2);
+//   setToggleErrorNote(true);
+//   console.log( 3);
+//   setTimeout(delayNote, 3000)
+//   console.log( 4);
+//  function delayNote() {
+//   //  setToggleErrorNote(false);
+//   }
+//   console.log( 5);
+
+// }
+
+
+
+console.log( "after handleErrorFromServer");
+
+
+
+
+
+
+console.log( "sssssss" + toggleErrorNote);
+
 
   return (
     <div className="App  ">
       <div className="container  ">
 
-
-        {/* <ServerContact/> */}
-
-
+     
+        
         <WriteNote
           className="  "
-          toggle={toggle}
-          setToggle={setToggle}
+          errorText={errorText}
+          toggleErrorNote={toggleErrorNote}
+          // setToggleErrorNote={setToggleErrorNote}
+          setToggleSpinner={setToggleSpinner}
+          toggleSpinner={toggleSpinner}
           addNoteClick={addNoteClick}
           textArea={textArea}
           setTextArea={setTextArea}
           buttonDisabled={buttonDisabled}
-          // limitTextArealength={limitTextArealength}
-          // buttonDisabled={buttonDisabled}
-          // inputText={inputText}
-          // setinputText={setinputText}
         />
-
-        {/* <ServerContact
-          notes={notes}
-          setTextArea={setTextArea}
-          textArea={textArea}
-        /> */}
-          
+  
         <NoteList
-          notes={notes}
-          setNotes={setNotes}
-          // deleteNote={deleteNote}
-          // setinputText={setinputText}
-          // inputText={inputText}
+        makefetch={makefetch}
+         setMakefetch={setMakefetch}
+          noteListFromServer={noteListFromServer}
+           setNoteListFromServer={setNoteListFromServer}
           setTextArea={setTextArea}
           textArea={textArea}
-          // ChangeNoteClick={ChangeNoteClick}
         />
       </div>
     </div>

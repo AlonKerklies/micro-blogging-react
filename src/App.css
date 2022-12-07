@@ -51,7 +51,16 @@ body {
  }
 
 
-
+ .spinner-css{
+ 
+  color: #ffffff;
+    position:absolute;
+    margin-left: auto;
+    bottom : 20px;
+    left:15px;
+    
+  }
+ 
 
 
 .color-white{
