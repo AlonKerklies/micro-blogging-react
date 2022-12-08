@@ -3,17 +3,19 @@ import uuid from "react-uuid";
 import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import axios from "axios";
+ import { TweetContext } from "./components/TweetContext";
 
 function Home({}) {
   console.log("start app page");
 
-  const [toggleErrorNote, setToggleErrorNote] = useState(true);
-  const [errorText, setErrorText] = useState("");
-  const [toggleSpinner, setToggleSpinner] = useState(false);
-  const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [textArea, setTextArea] = useState("");
-  const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
-  const [prevTweets, setPrevTweets] = useState([]);
+    //משתנים בשימוש גלובלי
+    const {setToggleSpinner} = useContext(TweetContext);
+    const { textArea, setTextArea } = useContext(TweetContext);
+
+    //משתנים בשימוש מקומי
+    const [prevTweets, setPrevTweets] = useState([]);
+    const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
+    const currentDate = new Date();
 
   const baseURL =
     "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
@@ -21,8 +23,6 @@ function Home({}) {
   function NoTextNote() {
     window.confirm("note’s text is mandatory");
   }
-
-  const currentDate = new Date();
 
   const addNoteClick = () => {
     if (textArea.trim() === "") {
@@ -34,7 +34,6 @@ function Home({}) {
       content: textArea,
       userName: localStorage.getItem("userName"),
       date: currentDate.toISOString(),
-
       id: uuid(),
     });
   };
@@ -46,57 +45,33 @@ function Home({}) {
   const handleSubmit = () => {
     const isEmpty = Object.keys(newNoteAfterClick).length === 0;
     if (isEmpty === true) {
-      return;
-    } else {
-      {
-        console.log("a new tweet");
-      }
-    }
+      return; } else {
+      { console.log("a new tweet");}}
+      setToggleSpinner(true);
 
-    setToggleSpinner(true);
-
-
-    axios
-      .post(baseURL, newNoteAfterClick)
-                                
-      // .then(({ data }) => setMakefetch(data)) // עדכון של השרת
-      .then(function (response) {
-setPrevTweets([newNoteAfterClick, ...prevTweets]); //
-        setToggleSpinner(false);
-        setTextArea("");
+    axios .post(baseURL, newNoteAfterClick)                          
+// .then(({ data }) => setMakefetch(data)) // עדכון של השרת
+.then(function (response) {
+setPrevTweets([newNoteAfterClick, ...prevTweets]); //  שמירת הטוויטים הישנים  
+                                        
+        setToggleSpinner(false);   setTextArea("");
       })
       .catch(function (error) {
         setToggleSpinner(false);
-
         console.log(error.response.data.message);
       });
-
-    console.log("end app page");
-  };
+      
+    
+  };   console.log("end home. this is save tweets " , prevTweets  ); 
 
   return (
-    <div className="App">
+   
       <div className="container">
         <WriteNote
-          className="  "
-          errorText={errorText}
-          toggleErrorNote={toggleErrorNote}
-          setToggleSpinner={setToggleSpinner}
-          toggleSpinner={toggleSpinner}
-          addNoteClick={addNoteClick}
-          textArea={textArea}
-          setTextArea={setTextArea}
-          buttonDisabled={buttonDisabled}
-          setToggleErrorNote={setToggleErrorNote}
-          setErrorText={setErrorText}
-          setButtonDisabled={setButtonDisabled}
-        />
+          addNoteClick={addNoteClick}   />
 
-        <NoteList
-          setTextArea={setTextArea}
-          textArea={textArea}
-        />
-      </div>
+        <NoteList />
+     
     </div>
   );
 }

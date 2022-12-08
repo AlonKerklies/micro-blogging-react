@@ -11,17 +11,23 @@ function NoteList()
     //{ makefetch}
  { console.log("start notelist");
 
-
+ //משתנים בשימוש גלובלי
   const { noteListFromServer, setNoteListFromServer } = useContext(TweetContext);
-  // const [noteListFromServer, setNoteListFromServer] = useState([]);
-
- 
 
   const fetchData = () => {
     axios.get(baseURL).then(({ data }) => setNoteListFromServer(data.tweets));
   };
 
-  useEffect(() => { fetchData(); }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchData()
+       console.log("print");
+    }, 2500);   
+    //  return () => clearInterval(interval);
+  }, []);
+
+  //  useEffect(() => { 
+  //   fetchData(); }, []);
 
   return (
     <>
@@ -31,7 +37,7 @@ function NoteList()
           key={uuid()}
         >
           <div className="note-in-pack-title  d-flex  ">
-            <p className="  pe-2">{note.userName}</p> {/* כותרת */}
+            <p className="pe-2">{note.userName}</p> {/* כותרת */}
           </div>
           <p className="color-white">{note.content}</p> {/* תוכן הודעה */}
           <p className="note-date  "> Created at: {note.date} </p>{" "}
@@ -40,5 +46,11 @@ function NoteList()
     </>
   );
 }
+
+
+
+
+
+
 console.log("end note map");
 export default NoteList;

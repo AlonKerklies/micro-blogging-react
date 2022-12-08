@@ -1,27 +1,44 @@
-import React ,{useState} from 'react';
+import React, { useState, useEffect, useContext } from "react"; 
+import { TweetContext } from "./TweetContext";
 
-const  Spinner = ( {toggleSpinner})  => {
+// const [toggleSpinner ] = useContext(TweetContext);
+
+// const  Spinner = ( {toggleSpinner})  => {
+
+//   return (
+//     <div>
+// {toggleSpinner && (
+//  <div className= "spinner-css spinner-border text-light" role="status">
+// </div>  
+// )}
+//  </div>);
+ 
+// }     
+     
+// export default Spinner;
+
+
+
+
+
+
+
+
+ 
+function Spinner() 
+ 
+ {  
+
+  const { toggleSpinner }  = useContext(TweetContext);
+ 
 
   return (
-    <div>
-      {/* <button onClick={()=>setToggle(!toggle)}>toggle</button> */}
-
+    <div> 
 {toggleSpinner && (
- 
- 
- 
-
  <div className= "spinner-css spinner-border text-light" role="status">
- {/* <span class="sr-only">Loading...</span> */}
-</div> 
-
-  
- 
-
-
-  
+</div>  
 )}
- </div>); }     
-     
-
+ </div>);
+}
+ 
 export default Spinner;
