@@ -5,10 +5,8 @@ import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import axios from "axios";
 
-function Home({    }) {
-
-  console.log( "start app page");
- 
+function Home({}) {
+  console.log("start app page");
 
   const [toggleErrorNote, setToggleErrorNote] = useState(true);
   const [errorText, setErrorText] = useState("");
@@ -19,57 +17,61 @@ function Home({    }) {
   const [makefetch, setMakefetch] = useState([]);
   const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
 
-  const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
+  const baseURL =
+    "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
   function NoTextNote() {
     window.confirm("note’s text is mandatory");
   }
 
-const currentDate = new Date();
+  const currentDate = new Date();
 
-const addNoteClick = () => {
+  const addNoteClick = () => {
     if (textArea.trim() === "") {
       return NoTextNote();
+    } else {
     }
-    else {
+
+    setNewNoteAfterClick({
+      content: textArea,
+      userName: localStorage.getItem("userName"),
+      date: currentDate.toISOString(),
+
+      id: uuid(),
+    });
+  };
+
+  useEffect(() => {
+    handleSubmit();
+  }, [newNoteAfterClick]);
+
+  const handleSubmit = () => {
+    const isEmpty = Object.keys(newNoteAfterClick).length === 0;
+    if (isEmpty === true) {
+      return;
+    } else {
+      {
+        console.log("a new tweet");
+      }
     }
-     
-    setNewNoteAfterClick ( {
-    content: textArea   ,
-    userName:    localStorage.getItem("userName")    ,
-  date: currentDate.toISOString(),
- 
-    id: uuid()
-  } )
-};
 
- useEffect(() => {
-   handleSubmit();
-  },[newNoteAfterClick]);
+    setToggleSpinner(true);
+    axios
+      .post(baseURL, newNoteAfterClick)
+      .then(({ data }) => setMakefetch(data))
+      .then(function (response) {
+        setToggleSpinner(false);
 
-const handleSubmit = () => {
+        setTextArea("");
+      })
+      .catch(function (error) {
+        setToggleSpinner(false);
 
-const isEmpty = Object.keys(newNoteAfterClick).length === 0;
-  if (isEmpty === true) {return}
-    else { {console.log("a new tweet")} }
+        console.log(error.response.data.message);
+      });
 
-  setToggleSpinner(true);
-axios.post(baseURL, newNoteAfterClick).then(({ data }) => setMakefetch(data))
-.then(function (response) {
-setToggleSpinner(false);
-
-setTextArea("");
-})
-.catch(function (error) {
-  setToggleSpinner(false);
- 
-console.log( error.response.data.message);
- 
-});
-  
- console.log( "end app page");
-};
-
+    console.log("end app page");
+  };
 
   return (
     <div className="App">
@@ -87,15 +89,13 @@ console.log( error.response.data.message);
           setToggleErrorNote={setToggleErrorNote}
           setErrorText={setErrorText}
           setButtonDisabled={setButtonDisabled}
-
-
         />
-  
+
         <NoteList
-        makefetch={makefetch}
-         setMakefetch={setMakefetch}
+          makefetch={makefetch}
+          setMakefetch={setMakefetch}
           noteListFromServer={noteListFromServer}
-           setNoteListFromServer={setNoteListFromServer}
+        setNoteListFromServer={setNoteListFromServer}
           setTextArea={setTextArea}
           textArea={textArea}
         />
@@ -103,7 +103,5 @@ console.log( error.response.data.message);
     </div>
   );
 }
-
-
 
 export default Home;
