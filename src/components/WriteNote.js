@@ -1,6 +1,8 @@
+
+import React, { useState, useEffect, useContext } from "react"; 
 import ErrorNote from "./ErrorNote";
 import Spinner from "./spinner";
-import React, { useEffect } from "react";
+
 
 function WriteNote({
   setButtonDisabled,
@@ -15,6 +17,8 @@ function WriteNote({
   buttonDisabled,
   toggleSpinner,
 }) {
+
+  
   console.log("start WriteNote ");
 
   useEffect(() => {

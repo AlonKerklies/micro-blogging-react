@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react"; 
 import uuid from "react-uuid";
 import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
@@ -12,7 +12,6 @@ function Home({}) {
   const [toggleSpinner, setToggleSpinner] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [textArea, setTextArea] = useState("");
-  const [noteListFromServer, setNoteListFromServer] = useState([]);
   const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
   const [prevTweets, setPrevTweets] = useState([]);
 
@@ -94,10 +93,6 @@ setPrevTweets([newNoteAfterClick, ...prevTweets]); //
         />
 
         <NoteList
-          // makefetch={makefetch}
-          // setMakefetch={setMakefetch}
-          noteListFromServer={noteListFromServer}
-        setNoteListFromServer={setNoteListFromServer}
           setTextArea={setTextArea}
           textArea={textArea}
         />
