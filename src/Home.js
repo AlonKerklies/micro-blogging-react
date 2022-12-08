@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import uuid from "react-uuid";
-// import "./App.css";
 import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import axios from "axios";
@@ -14,8 +13,8 @@ function Home({}) {
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [textArea, setTextArea] = useState("");
   const [noteListFromServer, setNoteListFromServer] = useState([]);
-  const [makefetch, setMakefetch] = useState([]);
   const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
+  const [prevTweets, setPrevTweets] = useState([]);
 
   const baseURL =
     "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
@@ -56,12 +55,15 @@ function Home({}) {
     }
 
     setToggleSpinner(true);
+
+
     axios
       .post(baseURL, newNoteAfterClick)
-      .then(({ data }) => setMakefetch(data))
+                                
+      // .then(({ data }) => setMakefetch(data)) // עדכון של השרת
       .then(function (response) {
+setPrevTweets([newNoteAfterClick, ...prevTweets]); //
         setToggleSpinner(false);
-
         setTextArea("");
       })
       .catch(function (error) {
@@ -92,8 +94,8 @@ function Home({}) {
         />
 
         <NoteList
-          makefetch={makefetch}
-          setMakefetch={setMakefetch}
+          // makefetch={makefetch}
+          // setMakefetch={setMakefetch}
           noteListFromServer={noteListFromServer}
         setNoteListFromServer={setNoteListFromServer}
           setTextArea={setTextArea}

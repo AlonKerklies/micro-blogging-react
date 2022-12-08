@@ -4,7 +4,9 @@ import React from "react";
 import uuid from "react-uuid";
 const baseURL = "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
-function NoteList({ noteListFromServer, setNoteListFromServer, makefetch }) {
+function NoteList({ noteListFromServer, setNoteListFromServer, 
+  // makefetch 
+}) {
   console.log("start note map");
   
 
@@ -20,7 +22,7 @@ axios.get(baseURL).then(({ data }) => setNoteListFromServer(data.tweets))}
  
   useEffect(() => {
     fetchData();
-  },[makefetch]);
+  },[]);
 
 
   return (
