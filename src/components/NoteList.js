@@ -22,7 +22,7 @@ function NoteList()
     const interval = setInterval(() => {
       fetchData()
        console.log("print");
-    }, 2500);   
+    }, 3500);   
     //  return () => clearInterval(interval);
   }, []);
 
