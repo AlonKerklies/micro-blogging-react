@@ -16,6 +16,8 @@ function NoteList()
     //{ makefetch}
  { console.log("start notelist");
 
+ 
+ 
  //משתנים בשימוש גלובלי
   const { noteListFromServer, setNoteListFromServer } = useContext(TweetContext);
 
@@ -59,16 +61,45 @@ function NoteList()
           key={uuid()}
         >
           <div className="note-in-pack-title  d-flex  ">
-            <p className="pe-2">{ttt.userName}</p> {/* כותרת */}
+            <p className="pe-2">{ttt.tweet.userName}</p> {/* כותרת */}
           </div>
-          <p className="color-white">{ttt.content}</p> {/* תוכן הודעה */}
-          <p className="note-date  "> Created at: {ttt.date} </p>{" "}
+          <p className="color-white">{ttt.tweet.content}</p> {/* תוכן הודעה */}
+          <p className="note-date  "> Created at: {ttt.tweet.date} </p>{" "}
         </div>
-      ))} 
+      ))}
+
+
+      
     </>
   );
- 
+
+
+  
+  // return (
+  //   <>
+  //     {noteListFromServer.map((note) => (
+  //       <div
+  //         className="bg-color-grey-dark  note-in-pack    mt-3 p-3  pt-4  pb-2  rounded"
+  //         key={uuid()}
+  //       >
+  //         <div className="note-in-pack-title  d-flex  ">
+  //           <p className="pe-2">{note.userName}</p> {/* כותרת */}
+  //         </div>
+  //         <p className="color-white">{note.content}</p> {/* תוכן הודעה */}
+  //         <p className="note-date  "> Created at: {note.date} </p>{" "}
+  //       </div>
+  //     ))}
+  //   </>
+  // );
+
+
+
+
+
+
+
 }
+
 
 console.log("end note map");
 export default NoteList;
