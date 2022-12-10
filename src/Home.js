@@ -5,6 +5,9 @@ import NoteList from "./components/NoteList";
 import axios from "axios";
  import { TweetContext } from "./components/TweetContext";
 
+ import {db} from "./firebase";
+ import {set, ref, onValue, } from "firebase/database";
+
 function Home({}) {
   console.log("start app page");
 
@@ -17,6 +20,13 @@ function Home({}) {
     const [newNoteAfterClick, setNewNoteAfterClick] = useState([]);
     const currentDate = new Date();
 
+    const [toDo , setToDo] = useState("");
+    const [toDos , setToDos] = useState([]) ;
+  
+
+
+
+
   const baseURL =
     "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
 
@@ -24,18 +34,31 @@ function Home({}) {
     window.confirm("note’s text is mandatory");
   }
 
+
+
+
   const addNoteClick = () => {
     if (textArea.trim() === "") {
       return NoTextNote();
     } else {
     }
 
-    setNewNoteAfterClick({
-      content: textArea,
-      userName: localStorage.getItem("userName"),
-      date: currentDate.toISOString(),
-      id: uuid(),
-    });
+    //// מכניס הכל לפייר בייס
+        set(ref(db,`/${currentDate}`),{
+        content: textArea,
+        userName: localStorage.getItem("userName"),
+        date: currentDate.toISOString(),
+        id: uuid(),
+        })
+
+
+    // setNewNoteAfterClick({
+    //   content: textArea,
+    //   userName: localStorage.getItem("userName"),
+    //   date: currentDate.toISOString(),
+    //   id: uuid(),
+    // });
+
   };
 
   useEffect(() => {
