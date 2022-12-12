@@ -38,8 +38,7 @@ console.log(localStorage.getItem("userName") )
       <button
         onClick={() => handleClick({ inputName })}
         type="button"
-        className="profilebtn btn mt-2  btn-primary btn-block"
-      >
+        className="profilebtn btn mt-2  btn-primary btn-block" >
         Save
       </button>
     </div>

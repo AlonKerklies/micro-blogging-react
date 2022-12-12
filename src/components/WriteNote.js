@@ -1,14 +1,9 @@
-
-import React, { useState, useEffect, useContext } from "react"; 
-import { TweetContext } from "./TweetContext";
+import React, { useState, useEffect, useContext } from "react";
+import { TweetContext } from "../contexts/TweetContext";
 import ErrorNote from "./ErrorNote";
 import Spinner from "./spinner";
 
-function WriteNote({
-  addNoteClick,
-
-}) {
-
+function WriteNote({ addNoteClick }) {
   //משתנים בשימוש גלובלי
   const { textArea, setTextArea } = useContext(TweetContext);
 
@@ -36,7 +31,7 @@ function WriteNote({
 
   return (
     <div className="noteEdit needs-validation       ">
-      <Spinner   />
+      <Spinner />
       <ErrorNote toggleErrorNote={toggleErrorNote} errorText={errorText} />
       <textarea
         value={textArea}
@@ -55,7 +50,6 @@ function WriteNote({
         Tweet
       </button>
     </div>
-  
   );
 }
 export default WriteNote;

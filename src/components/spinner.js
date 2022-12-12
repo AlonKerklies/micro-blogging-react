@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react"; 
-import { TweetContext } from "./TweetContext";
+import React, { useState, useEffect, useContext } from "react";
+import { TweetContext } from "../contexts/TweetContext";
 
 // const [toggleSpinner ] = useContext(TweetContext);
 
@@ -9,36 +9,27 @@ import { TweetContext } from "./TweetContext";
 //     <div>
 // {toggleSpinner && (
 //  <div className= "spinner-css spinner-border text-light" role="status">
-// </div>  
+// </div>
 // )}
 //  </div>);
- 
-// }     
-     
+
+// }
+
 // export default Spinner;
 
-
-
-
-
-
-
-
- 
-function Spinner() 
- 
- {  
-
-  const { toggleSpinner }  = useContext(TweetContext);
- 
+function Spinner() {
+  const { toggleSpinner } = useContext(TweetContext);
 
   return (
-    <div> 
-{toggleSpinner && (
- <div className= "spinner-css spinner-border text-light" role="status">
-</div>  
-)}
- </div>);
+    <div>
+      {toggleSpinner && (
+        <div
+          className="spinner-css spinner-border text-light"
+          role="status"
+        ></div>
+      )}
+    </div>
+  );
 }
- 
+
 export default Spinner;
