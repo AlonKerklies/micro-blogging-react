@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { auth } from "../firebase";
-import { useAuth } from "../contexts/AuthContext";
+import { auth } from "./firebase";
+import { useAuth } from "./contexts/AuthContext";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -9,9 +9,8 @@ import {
   signOut,
 } from "firebase/auth";
 
-// import "bootstrap/dist/css/bootstrap.min.css";
 
-export default function Signup() {
+export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -28,6 +27,8 @@ export default function Signup() {
   // onAuthStateChanged(auth, (currentUser) => {
   //   setUser(currentUser);
   // });
+
+
   const logout = async () => {
     await signOut(auth);
   };
@@ -44,9 +45,10 @@ export default function Signup() {
   //   return setError("The passwords are not the same")
   // }
 
-  const register = async () => {
+
+  const login = async () => {
     try {
-      const user = await createUserWithEmailAndPassword(
+      const user = await signInWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
@@ -56,14 +58,18 @@ export default function Signup() {
       console.log(error.message);
     }
   };
-  console.log(1234);
-  return auth.currentUser ? (
+
+
+
+   return auth.currentUser ? (
     <>
-      {/* <Card></Card> */}
+
+
+      {/* --------------  למקרה שהיוזר כבר לוג אין ------------------ */}
       <div className="container mt-6  color-white ">
         <div className="App">
           <div>
-            <h1 className="hedline-text color-white pb-3">Sign up </h1>
+            <h1 className="hedline-text color-white pb-3">yoe are log in at </h1>
 
             <p className="subline-text color-white">
               {" "}
@@ -81,72 +87,18 @@ export default function Signup() {
         Sign Out 
       </button>
 
-
-
-          
           </div>
-
-          {/* <div>
-        <h3> Login </h3>
-        <input
-          placeholder="Email..."
-          onChange={(event) => {
-            setLoginEmail(event.target.value);
-          }}
-        />
-        <input
-          placeholder="Password..."
-          onChange={(event) => {
-            setLoginPassword(event.target.value);
-          }}
-        />
-
-        <button onClick={login}> Login</button>
-      </div> */}
-
-          {/* {user?.email} */}
-
-          {/* <button onClick={logout}> Sign Out </button> */}
         </div>
-
-        {/* <h1 className="hedline-text color-white pb-3">login</h1> */}
-
-        {/*   
-<Form onSubmit >
-            <Form.Group id="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
-            </Form.Group>
-            <Form.Group id="password">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
-            </Form.Group>
-            <Form.Group id="password-confirm">
-              <Form.Label>Password Confirmation</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
-            </Form.Group>
-
-
-            <Button 
-            // disabled={loading} 
-            className="w-100" type="submit">
-              Sign Up
-            </Button>
-
-            <div className=" color-white">alredyhave a n acount?</div>
-            
-          </Form> */}
       </div>
     </>
   ) : (
 
-     
+    <>
+       {/* --------------  לוג אין------------------ */}
      <div className="container mt-6  ">
-    <h1 className="hedline-text color-white   mb-5">Sign Up</h1>
-
+    <h1 className="hedline-text color-white  mb-4  ">Welcome Back</h1>
     <Form>
         <Form.Group controlId="formBasicEmail">
-
           <Form.Control
             // value={inputName}
             onChange={(event) => {
@@ -165,39 +117,21 @@ export default function Signup() {
             className="inputName bg-transparent  rounded  p-3 border border-2 mb-3"
             type="text"
             placeholder="Password..."
-
-
           />
+<button
+            onClick={login}
+            type="button"
+            className="  btn mt-2  btn-primary btn-block" >
+            Login
+            </button>
         </Form.Group>
       </Form>
 
+ <p className="subline-text color-white mt-5">Don't have an account yet? - 
+ <span className="subline-text color-white  ">   sign up</span></p>
+</div> 
 
-
-{/* 
-    <input
-              placeholder="Email..."
-              onChange={(event) => {
-                setRegisterEmail(event.target.value);
-              }}
-            />
-            <input
-              placeholder="Password..."
-              onChange={(event) => {
-                setRegisterPassword(event.target.value);
-              }}
-            /> */}
-
-          
-
-            <button
-       onClick={register}
-        type="button"
-        className="profilebtn btn mt-2  btn-primary btn-block" >
-         Create User
-      </button>
-
-
-      </div> 
-  
+</>
+ 
   );
 }

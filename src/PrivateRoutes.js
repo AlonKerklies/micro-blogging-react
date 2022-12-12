@@ -4,10 +4,10 @@ console.log("PrivateRoutes");
 
 const PrivateRoutes = () => {
     
-    //   auth = {'token':true}
+    //   בדיקה האם יש משתמש פעיל אם כן תחסום
     
     return(
-        auth.currentUser  ? <Outlet/> : <Navigate to="/log"/>
+        auth.currentUser  ? <Outlet/> : <Navigate to="/Signup"/>
     )
 }
 
