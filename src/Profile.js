@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import { db } from "./firebase";
 import { getDatabase, ref, set     } from "firebase/database";
 // import { doc, updateDoc } from "firebase/firestore";
-import { collection, addDoc, getDocs, onSnapshot, query, orderBy, limit,  doc, updateDoc, where, orderByKey ,equalTo } from 'firebase/firestore';
+import { collection, addDoc, getDocs, writeBatch, onSnapshot, query, orderBy, limit,  doc, updateDoc, where, orderByKey ,equalTo,update , } from 'firebase/firestore';
 
 
 function Profile({  }) {
@@ -38,12 +38,28 @@ const changUserNameInUserList =  async () => {
  const changUserNameIntweetList =  async () => {
   console.log("try");
  
-  // const changeThetweetCollection = doc(db, `tweets`).orderByKey(localStorage.getItem("userID"));
-  const changeThetweetCollection =  tweetsCollectionFromDB.where("userID" == localStorage.getItem("userID") )
- console.log(tweetsCollectionFromDB);
+
+   
+  const q = query(collection(db, "tweets"), where("userID", "==", localStorage.getItem("userID")));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach (   (doc) => {      console.log(doc.id,            " => ", doc.data());
+  // updateDoc({ userName: inputName } )
+  
+} );
+   
+
+  //  doc.update({ userName: inputName } )
+  //  batch.update(querySnapshot,  { nickname: inputName }   );
+    
+            
+// const batch = writeBatch(db);
+  // const changeThetweetCollection = doc(db, `tweets`).orderByKey(localStorage.getItem("userID")); .update
+  // const changeThetweetCollection =  tweetsCollectionFromDB.where("userID" == localStorage.getItem("userID") )
+ 
+//  console.log(q);
  try { 
-     await   changeThetweetCollection.update ({
-      userID: inputName  });
+    //  await   q.update ({
+    //   userID: inputName  });
     }  
      catch (err) {
     console.log(err);
