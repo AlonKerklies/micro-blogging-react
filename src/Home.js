@@ -9,7 +9,7 @@ import { collection, addDoc, getDocs, onSnapshot } from 'firebase/firestore';
 
 
 function Home({}) {
-  console.log("start app page");
+ 
 
   //משתנים בשימוש גלובלי
   const { setToggleSpinner } = useContext(TweetContext);

@@ -7,14 +7,8 @@ import { db } from "../firebase";
 
 // const baseURL =
 //   "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
-function NoteList() { console.log("start notelist");
+function NoteList() {  
  
-useEffect(() => {
-  const interval = setInterval(() => {
-    console.log('This will run every second!');
-  }, 3500);
-//  return () => clearInterval(interval);
-}, [ ]);
 
 
   //משתנים בשימוש גלובלי
@@ -23,6 +17,11 @@ useEffect(() => {
     
    //משתנים בשימוש מקומי
     const tweetsCollectionFromDB = collection(db, `tweets`);
+
+
+
+
+
 
     const getAllNotes = async () => {
       try {
@@ -46,10 +45,16 @@ useEffect(() => {
     };
 
 
-    useEffect(() => {
-      getAllNotes();
-    }, []);
+ 
 
+
+    useEffect(() => {
+      const interval = setInterval(() => {
+        getAllNotes();
+       }, 3000);
+    //  return () => clearInterval(interval);
+    }, []);
+    
 
 
   return (

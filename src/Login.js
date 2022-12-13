@@ -1,13 +1,16 @@
 import React, { useRef, useState } from "react";
-import { Form, Button, Card, Alert } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import { auth } from "./firebase";
 import { useAuth } from "./contexts/AuthContext";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
+  signOut
 } from "firebase/auth";
+
+import {
+  Link
+} from "react-router-dom";
+
 
 
 export default function Login() {
@@ -127,8 +130,11 @@ export default function Login() {
         </Form.Group>
       </Form>
 
- <p className="subline-text color-white mt-5">Don't have an account yet? - 
- <span className="subline-text color-white  ">   sign up</span></p>
+ <p className="subline-text color-white mt-5">Don't have an account yet?  
+   <Link to="/Signup" className="subline-text color-white ms-2 ">sign up</Link>  
+
+ 
+ </p>
 </div> 
 
 </>

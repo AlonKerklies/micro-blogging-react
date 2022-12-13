@@ -37,10 +37,10 @@ const changUserNameInUserList =  async () => {
 
  const changUserNameIntweetList =  async () => {
   console.log("try");
-
-  const changeThetweetCollection = doc(db, `tweets`).orderByKey(localStorage.getItem("userID"));
  
- console.log(changeThetweetCollection);
+  // const changeThetweetCollection = doc(db, `tweets`).orderByKey(localStorage.getItem("userID"));
+  const changeThetweetCollection =  tweetsCollectionFromDB.where("userID" == localStorage.getItem("userID") )
+ console.log(tweetsCollectionFromDB);
  try { 
      await   changeThetweetCollection.update ({
       userID: inputName  });
