@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import { Form, Button, Card, Alert } from "react-bootstrap";
-import { auth } from "./firebase";
+import { collection, addDoc, getDocs, onSnapshot } from 'firebase/firestore';
+import { auth, db } from "./firebase";
+
 import { useAuth } from "./contexts/AuthContext";
 import {
   createUserWithEmailAndPassword,
@@ -17,45 +19,60 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState("");
-
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  // const [userInfoForServer, setUserInfoForServer] = useState("");
+  const currentDate = new Date();
 
-  // const [user, setUser] = useState({});
 
-  // onAuthStateChanged(auth, (currentUser) => {
-  //   setUser(currentUser);
-  // });
+
+
+ 
+ 
+
+
+
   const logout = async () => {
     await signOut(auth);
   };
 
-
-  async function handleSubmit(e) {
-    e.preventDefault();
-    signup(emailRef.current.value, passwordRef.current.value);
-  }
-
-  //בדיקת סיסמאות
-  // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-  //   return setError("The passwords are not the same")
-  // }
-
   const register = async () => {
     try {
+
+      
+       const  userInfoForServer  =  {
+        // mail: registerEmail,
+        nickname: "nickname",
+        profile_picture : "",
+        date: currentDate.toLocaleString()
+      } ;
+    
+      const takeItForStore = await addDoc(collection(db, `users`), userInfoForServer);
+      // const usertWithIdFromServer = { ...userInfoForServer, id: takeItForStore.id,};
+      // console.log(usertWithIdFromServer);
+     localStorage.setItem("userID", takeItForStore.id);
+      // console.log(localStorage.getItem("userID") )
+      // localStorage.setItem("userName", inputName);
+      // console.log(localStorage.getItem("userName") )
+      
+
       const user = await createUserWithEmailAndPassword(
         auth,
         registerEmail,
         registerPassword
       );
+
+
+
+
       console.log(user);
     } catch (error) {
       console.log(error.message);
     }
   };
-  console.log(1234);
+
+
+
   return auth.currentUser ? (
     <>
         {/* --------------  למקרה שהיוזר כבר לוג אין ------------------ */}
@@ -126,3 +143,20 @@ export default function Signup() {
   
   );
 }
+  // const [loginEmail, setLoginEmail] = useState("");
+  // const [loginPassword, setLoginPassword] = useState("");
+
+  // const [user, setUser] = useState({});
+
+  // onAuthStateChanged(auth, (currentUser) => {
+  //   setUser(currentUser);
+  // });
+ // async function handleSubmit(e) {
+  //   e.preventDefault();
+  //   signup(emailRef.current.value, passwordRef.current.value);
+  // }
+
+  //בדיקת סיסמאות
+  // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+  //   return setError("The passwords are not the same")
+  // }

@@ -39,12 +39,12 @@ function App() {
           </li>
           <li className="ms-auto p-2  ">
             <NavLink className="nav-bar-link" to="/log">
-              logIn 
+              logIn
             </NavLink>
           </li>
           <li className="  p-2 me-5">
             <NavLink className="nav-bar-link" to="/Signup">
-               signUp
+              signUp
             </NavLink>
           </li>
         </ul>
@@ -53,15 +53,12 @@ function App() {
 
         <TweetContextProvider>
           <Routes>
-
-            <Route element={<PrivateRoutes />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/Profile" element={<Profile />} />
+            <Route element={<PrivateRoutes />} >
+            <Route path="/" element={<Home />} />
+            <Route path="/Profile" element={<Profile />} />
             </Route>
 
-
             <Route path="/log" element={<Login />} />
-
 
             <Route path="/Signup" element={<Signup />} />
           </Routes>

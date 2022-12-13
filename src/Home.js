@@ -5,6 +5,8 @@ import NoteList from "./components/NoteList";
 import { TweetContext } from "./contexts/TweetContext";
 import { db } from "./firebase";
 import { set, ref, onValue } from "firebase/database";
+import { collection, addDoc, getDocs, onSnapshot } from 'firebase/firestore';
+
 
 function Home({}) {
   console.log("start app page");
@@ -36,25 +38,49 @@ function Home({}) {
     setTweet({
       content: textArea,
       userName: localStorage.getItem("userName"),
-      date: currentDate.toISOString(),
-      id: uuid(),
+      date: currentDate.toLocaleString(),
+      userID: localStorage.getItem("userID")
+      // id: uuid(),
     });
+
+    // localStorage.setItem("userID", takeItForStore.id);
+    // console.log(localStorage.getItem("userID") )
+    // localStorage.setItem("userName", inputName);
+    // console.log(localStorage.getItem("userName") )
 
     // בלוקאל שמירת הטוויטים הישנים
     setPrevTweets([tweet, ...prevTweets]);
-  };
-
-  const handleSubmit = () => {
-    //// מכניס הכל לפייר בייס
-    set(ref(db, `/${currentDate}`), {
-      tweet,
-    });
-    setToggleSpinner(false); // סוגר ספינר
+    
   };
 
   useEffect(() => {
     handleSubmit();
   }, [tweet]);
+
+  const handleSubmit =  async () => {
+    console.log(tweet);
+
+    // set(ref(db, `/${currentDate}`), {      // מכניס הכל לפייר בייס
+    //   tweet, });
+
+    try { 
+      // `tweets` gonna be the collection in firestore
+      const takeItForStore = await addDoc(collection(db, `tweets`), tweet);
+      const tweetWithIdFromServer = { ...tweet, id: takeItForStore.id,};
+      console.log(tweetWithIdFromServer);
+
+      // const newNoteWithId = { ...tweet, id: takeItForStore.id,};
+      // console.log(newNoteWithId);
+      // const addedNoteArray = [newNoteWithId, ...notesList];
+      // setNotesList(addedNoteArray);
+
+      }   catch (err) {
+      console.log(err);
+    }
+    setToggleSpinner(false); // סוגר ספינר
+  };
+
+
 
 
 
@@ -69,28 +95,4 @@ function Home({}) {
 export default Home;
 
 
-
-  // useEffect(() => {
-  //   handleSubmit();
-  // }, [newNoteAfterClick]);
-
-  //   const handleSubmit = () => {
-  //     const isEmpty = Object.keys(newNoteAfterClick).length === 0;
-  //     if (isEmpty === true) {
-  //       return; } else {
-  //       { console.log("a new tweet");}}
-  //       setToggleSpinner(true);
-
-  //     axios .post(baseURL, newNoteAfterClick)
-  // // .then(({ data }) => setMakefetch(data)) // עדכון של השרת
-  // .then(function (response) {
-  // setPrevTweets([newNoteAfterClick, ...prevTweets]); //  שמירת הטוויטים הישנים
-
-  //         setToggleSpinner(false);   setTextArea("");
-  //       })
-  //       .catch(function (error) {
-  //         setToggleSpinner(false);
-  //         console.log(error.response.data.message);
-  //       });
-
-  //   };   console.log("end home. this is save tweets " , prevTweets  );
+ 
