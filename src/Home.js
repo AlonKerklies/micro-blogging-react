@@ -5,12 +5,9 @@ import NoteList from "./components/NoteList";
 import { TweetContext } from "./contexts/TweetContext";
 import { db } from "./firebase";
 import { set, ref, onValue } from "firebase/database";
-import { collection, addDoc, getDocs, onSnapshot } from 'firebase/firestore';
-
+import { collection, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 
 function Home({}) {
- 
-
   //משתנים בשימוש גלובלי
   const { setToggleSpinner } = useContext(TweetContext);
   const { textArea, setTextArea } = useContext(TweetContext);
@@ -39,8 +36,7 @@ function Home({}) {
       content: textArea,
       userName: localStorage.getItem("userName"),
       date: currentDate.toLocaleString(),
-      userID: localStorage.getItem("userID")
-      // id: uuid(),
+      userID: localStorage.getItem("userID"),
     });
 
     // localStorage.setItem("userID", takeItForStore.id);
@@ -48,41 +44,26 @@ function Home({}) {
     // localStorage.setItem("userName", inputName);
     // console.log(localStorage.getItem("userName") )
 
-    // בלוקאל שמירת הטוויטים הישנים
+    // save to locallist
     setPrevTweets([tweet, ...prevTweets]);
-    
   };
 
   useEffect(() => {
     handleSubmit();
   }, [tweet]);
 
-  const handleSubmit =  async () => {
-    console.log(tweet);
+  const handleSubmit = async () => {
+    // console.log(tweet);
 
-    // set(ref(db, `/${currentDate}`), {      // מכניס הכל לפייר בייס
-    //   tweet, });
-
-    try { 
-      // `tweets` gonna be the collection in firestore
+    try {
       const takeItForStore = await addDoc(collection(db, `tweets`), tweet);
-      const tweetWithIdFromServer = { ...tweet, id: takeItForStore.id,};
-      console.log(tweetWithIdFromServer);
-
-      // const newNoteWithId = { ...tweet, id: takeItForStore.id,};
-      // console.log(newNoteWithId);
-      // const addedNoteArray = [newNoteWithId, ...notesList];
-      // setNotesList(addedNoteArray);
-
-      }   catch (err) {
+      const tweetWithIdFromServer = { ...tweet, id: takeItForStore.id };
+      // console.log(tweetWithIdFromServer);
+    } catch (err) {
       console.log(err);
     }
     setToggleSpinner(false); // סוגר ספינר
   };
-
-
-
-
 
   return (
     <div className="container">
@@ -93,6 +74,3 @@ function Home({}) {
 }
 
 export default Home;
-
-
- 

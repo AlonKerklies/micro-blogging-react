@@ -1,147 +1,72 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import React from "react";
 import Form from "react-bootstrap/Form";
 import { db } from "./firebase";
-import { getDatabase, ref, set     } from "firebase/database";
-// import { doc, updateDoc } from "firebase/firestore";
-import { collection, addDoc, getDocs, writeBatch, onSnapshot, query, orderBy, limit,  doc, updateDoc, where, orderByKey ,equalTo,update , } from 'firebase/firestore';
+import { useNavigate } from "react-router-dom";
 
+import {
+  collection,
+  getDocs,
+  query,
+  doc,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
-function Profile({  }) {
-
+function Profile({}) {
   const tweetsCollectionFromDB = collection(db, `tweets`);
   const [inputName, setInputName] = useState("");
- 
-
+  const navigae = useNavigate("");
 
   const handleClick = ({ inputName }) => {
-localStorage.setItem("userName", inputName);
- console.log(localStorage.getItem("userName") )
- changUserNameIntweetList()
-  changUserNameInUserList()
-  
-};
+    localStorage.setItem("userName", inputName);
+    console.log(localStorage.getItem("userName"));
+    changUserNameIntweetList();
+    changUserNameInUserList();
+  };
 
+  const changUserNameInUserList = async () => {
+    const changeTheUserCollection = doc(
+      db,
+      "users",
+      localStorage.getItem("userID")
+    );
 
-const changUserNameInUserList =  async () => {
-  const changeTheUserCollection = doc(db, "users", localStorage.getItem("userID"));
-  // const changeTheTweetCollection = doc(db, "tweets", localStorage.getItem("userID"));
-  try { 
-     await updateDoc(changeTheUserCollection, {
-        nickname: inputName  });
-    }   catch (err) {
-    console.log(err);
-  }
-};
+    try {
+      await updateDoc(changeTheUserCollection, {
+        nickname: inputName,
+      });
+      navigae("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  const changUserNameIntweetList = async () => {
+    console.log("try");
 
- const changUserNameIntweetList =  async () => {
-  console.log("try");
- 
+    const q = query(
+      collection(db, "tweets"),
+      where("userID", "==", localStorage.getItem("userID"))
+    );
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+      // updateDoc({ userName: inputName } )
+    });
 
-   
-  const q = query(collection(db, "tweets"), where("userID", "==", localStorage.getItem("userID")));
-  const querySnapshot = await getDocs(q);
-  querySnapshot.forEach (   (doc) => {      console.log(doc.id,            " => ", doc.data());
-  // updateDoc({ userName: inputName } )
-  
-} );
-   
-
-  //  doc.update({ userName: inputName } )
-  //  batch.update(querySnapshot,  { nickname: inputName }   );
-    
-            
-// const batch = writeBatch(db);
-  // const changeThetweetCollection = doc(db, `tweets`).orderByKey(localStorage.getItem("userID")); .update
-  // const changeThetweetCollection =  tweetsCollectionFromDB.where("userID" == localStorage.getItem("userID") )
- 
-//  console.log(q);
- try { 
-    //  await   q.update ({
-    //   userID: inputName  });
-    }  
-     catch (err) {
-    console.log(err);
-  }
-};
-
-
-
-
-
-// const changUserNameInTweet  =  async () => {
- //    const tweetsCollectionFromDB = collection(db, `tweets`);
-//  const q =  query(tweetsCollectionFromDB,orderBy("userName" ) ); 
-
-  // const changeTheTweetCollection = doc(db, "tweets", localStorage.getItem( userID ));
-//   try { 
-//      await updateDoc(changeTheTweetCollection, {
-//         nickname: inputName  });
-//     }   catch (err) {
-//     console.log(err);
-//   }
-// };
-
-
-// 
-
- 
-
-
-
-
-// 
-
-// // Set the "capital" field of the city 'DC'
-// await updateDoc(changUserNameInFirebase, {
-//   nickname: inputName 
-// });
-
-
-
-// function writeUserData( inputName ) {
-//   console.log("start change name in server" )
-//   const db = getDatabase();
-//   set(ref(db, 'users/' + localStorage.getItem("userID")), {
-//     nickname: inputName 
-//    });
-// }
-
-
-// import { doc, updateDoc } from "firebase/firestore";
-
-// const washingtonRef = doc(db, "cities", "DC");
-
-// // Set the "capital" field of the city 'DC'
-// await updateDoc(washingtonRef, {
-//   capital: true
-// });
-
-
-
-
-  // const  userInfoForServer  =  {
-  //   mail: registerEmail,
-  //   nickname: "nickname",
-  //   profile_picture : "",
-  //   date: currentDate.toLocaleString()
-  // } ;
-
-  // localStorage.setItem("userID", takeItForStore.id);
-  // console.log(localStorage.getItem("userID") )
-  // localStorage.setItem("userName", inputName);
-  // console.log(localStorage.getItem("userName") )
-  
-
-
-
-
+    try {
+      //  await   q.update ({
+      //   userID: inputName  });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <div className="container mt-6  ">
       <h1 className="hedline-text color-white pb-3">Profile</h1>
-      <p className="subline-text color-white">User Name</p>
+      <p className="subline-text color-white">Choose Username</p>
 
       <Form>
         <Form.Group controlId="formBasicEmail">
@@ -158,7 +83,8 @@ const changUserNameInUserList =  async () => {
       <button
         onClick={() => handleClick({ inputName })}
         type="button"
-        className="profilebtn btn mt-2  btn-primary btn-block" >
+        className="profilebtn btn mt-2  btn-primary btn-block"
+      >
         Save
       </button>
     </div>

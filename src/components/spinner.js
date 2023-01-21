@@ -1,21 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { TweetContext } from "../contexts/TweetContext";
-
-// const [toggleSpinner ] = useContext(TweetContext);
-
-// const  Spinner = ( {toggleSpinner})  => {
-
-//   return (
-//     <div>
-// {toggleSpinner && (
-//  <div className= "spinner-css spinner-border text-light" role="status">
-// </div>
-// )}
-//  </div>);
-
-// }
-
-// export default Spinner;
 
 function Spinner() {
   const { toggleSpinner } = useContext(TweetContext);

@@ -4,15 +4,10 @@ import ErrorNote from "./ErrorNote";
 import Spinner from "./spinner";
 
 function WriteNote({ addNoteClick }) {
-  //משתנים בשימוש גלובלי
   const { textArea, setTextArea } = useContext(TweetContext);
-
-  //משתנים בשימוש מקומי
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [errorText, setErrorText] = useState("");
   const [toggleErrorNote, setToggleErrorNote] = useState(true);
-
-  console.log("start WriteNote ");
 
   useEffect(() => {
     limitTextArealength();
