@@ -4,12 +4,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAdpkCxrNhh147Li3rTDQJQq-dPWH02zEw",
-  authDomain: "alon-kerklies-tweet.firebaseapp.com",
-  projectId: "alon-kerklies-tweet",
-  storageBucket: "alon-kerklies-tweet.appspot.com",
-  messagingSenderId: "175355697879",
-  appId: "1:175355697879:web:6892a9a3bcdcc6f64aee92",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGINSENDERID,
+  appId: process.env.REACT_APP_FIREBASE_APPID,
 };
 
 // Initialize Firebase
