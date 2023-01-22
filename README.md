@@ -12,6 +12,8 @@ in the terminal:
 
 - npm install
 
+- at firebase.js change all the keys to your keys from firebase
+
 - npm start
 
 ### Enjoy
