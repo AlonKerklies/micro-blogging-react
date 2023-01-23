@@ -8,8 +8,22 @@ import Login from "./Login";
 import { AuthProvider } from "./contexts/AuthContext";
 import PrivateRoutes from "./PrivateRoutes";
 import { auth } from "./firebase";
+import React, { useState, useEffect, useContext } from "react";
 
 function App() {
+
+  const cheaklocal =  () => {
+    console.log( localStorage.getItem("userID" ));
+    if (localStorage.getItem("userID" ) === null){
+      localStorage.setItem("userID", 0 )
+    };
+
+  }
+  useEffect(() => {
+    cheaklocal();
+  }, []);
+
+  
   console.log("auth.currentUser", auth.currentUser);
 
   return (

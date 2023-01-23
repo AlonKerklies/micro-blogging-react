@@ -4,7 +4,7 @@ import WriteNote from "./components/WriteNote";
 import NoteList from "./components/NoteList";
 import { TweetContext } from "./contexts/TweetContext";
 import { db } from "./firebase";
-import { set, ref, onValue } from "firebase/database";
+ 
 import { collection, addDoc, getDocs, onSnapshot } from "firebase/firestore";
 
 function Home({}) {
@@ -35,14 +35,14 @@ function Home({}) {
     setTweet({
       content: textArea,
       userName: localStorage.getItem("userName"),
-      date: currentDate.toLocaleString(),
+      date: currentDate.toLocaleString('he-il'),
       userID: localStorage.getItem("userID"),
     });
 
     // localStorage.setItem("userID", takeItForStore.id);
     // console.log(localStorage.getItem("userID") )
     // localStorage.setItem("userName", inputName);
-    // console.log(localStorage.getItem("userName") )
+    console.log( 'tweet', tweet )
 
     // save to locallist
     setPrevTweets([tweet, ...prevTweets]);
@@ -58,7 +58,9 @@ function Home({}) {
     try {
       const takeItForStore = await addDoc(collection(db, `tweets`), tweet);
       const tweetWithIdFromServer = { ...tweet, id: takeItForStore.id };
-      // console.log(tweetWithIdFromServer);
+      
+      console.log(takeItForStore);
+       console.log(tweetWithIdFromServer);
     } catch (err) {
       console.log(err);
     }

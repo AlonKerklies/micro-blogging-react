@@ -27,7 +27,7 @@ function NoteList() {
       const q = query(
         tweetsCollectionFromDB,
         orderBy("date", "desc"),
-        limit(4)
+        limit(11)
       );
       const allNotesSnapShot = await getDocs(q);
       ///////////////////////////////////

@@ -29,7 +29,7 @@ function Profile({}) {
     const changeTheUserCollection = doc(
       db,
       "users",
-      localStorage.getItem("userID")
+      localStorage.getItem("userID")     
     );
 
     try {
