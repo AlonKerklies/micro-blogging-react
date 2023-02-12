@@ -1,4 +1,8 @@
 /* -----------------------general------------------- */
+:root{
+  --color-no1:  #ffffff;
+}
+
 
 p,
 span,
@@ -9,13 +13,17 @@ textarea.form-control {
   font-family: "Roboto", sans-serif;
 }
 
+
+
+
+
 .form-control:focus {
   color: #6c757d;
 }
 
 .navbar {
   list-style-type: none;
-  color: #ffffff;
+  color: var( --color-no1); 
   height: 58px;
 }
 
@@ -30,12 +38,12 @@ textarea.form-control {
 }
 
 .nav-bar-link:hover {
-  color: #ffffff;
+  color: var( --color-no1); 
   text-decoration: underline;
 }
 
 .nav-bar-link:active {
-  color: #ffffff;
+  color: var( --color-no1); 
 
   text-decoration: underline;
 }
@@ -54,7 +62,7 @@ body {
 
 
 .color-white {
-  color: #ffffff;
+  color:  var( --color-no1); 
 }
 
 .color-grey-ccc {
@@ -70,7 +78,7 @@ body {
 }
 
 .bg-color-white {
-  background-color: #ffffff;
+  background-color:  var( --color-no1); 
 }
 
 .bg-color-grey-ccc {
@@ -138,7 +146,7 @@ body {
 }
 
 .spinner-css {
-  color: #ffffff;
+  color:  var( --color-no1); 
   position: absolute;
   margin-left: auto;
   bottom: 20px;
@@ -146,7 +154,7 @@ body {
 }
 
 textarea {
-  border: #cccccc;
+  border:  var( --color-no1); 
   height: 180px;
   background-color: blue;
   resize: none;
@@ -181,4 +189,21 @@ textarea {
 .PopUpModal {
   z-index: 3;
   background-color: #09439b;
+}
+
+
+.profileImage{
+  width: 80px; 
+  height: 80px;
+  border-radius: 100%;
+  background-color: var( --color-no1); 
+  border-color: var( --color-no1); 
+  border: 2px solid var( --color-no1); 
+  border-width: 2px;
+}
+
+.profileImage img{
+  border-radius: 100%;
+  width: 100%; 
+  height:  100%;
 }

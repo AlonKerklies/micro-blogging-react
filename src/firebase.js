@@ -1,7 +1,12 @@
 // import { getDatabase } from "firebase/database"; //הוספת האפשרות
-import { getFirestore } from "firebase/firestore";
+import { getFirestore,   } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getSelectionRange } from "@testing-library/user-event/dist/utils";
+
+ import firebase from "firebase/app";
+ import "firebase/storage";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,4 +23,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
-export { app, db, auth };
+
+const storage = getStorage(app);
+
+export { app, db, auth , storage };

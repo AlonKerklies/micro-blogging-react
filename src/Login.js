@@ -16,6 +16,8 @@ export default function Login() {
 
   const logout = async () => {
     await signOut(auth);
+    localStorage.setItem("userID", '');
+    localStorage.setItem("userName", '');
   };
 
   const login = async () => {
@@ -26,7 +28,9 @@ export default function Login() {
         registerEmail,
         registerPassword
       );
-      console.log(user);
+      console.log(user );
+      localStorage.setItem("userID", user.user.uid);
+ 
       navigae("/Profile");
     } catch (error) {
       setErrorMsg(error.message);

@@ -15,7 +15,12 @@ function Home({}) {
   //משתנים בשימוש מקומי
   const [prevTweets, setPrevTweets] = useState([]);
   const [tweet, setTweet] = useState([]);
-  const currentDate = new Date();
+  const currentDate = new Date( )
+
+ 
+  // const d = new Date(); // for now
+  // const datetext =       d.getHours()+":"+d.getMinutes()+":"+d.getSeconds();
+// console.log(datetext);
 
   // const baseURL =
   //   "https://micro-blogging-dot-full-stack-course-services.ew.r.appspot.com/tweet";
@@ -35,18 +40,25 @@ function Home({}) {
     setTweet({
       content: textArea,
       userName: localStorage.getItem("userName"),
-      date: currentDate.toLocaleString('he-il'),
+      date: currentDate.getTime(),  
       userID: localStorage.getItem("userID"),
+      previewDate: currentDate.toLocaleString('he-il'),
     });
 
+
+    // date: currentDate.toLocaleString('he-il'),
     // localStorage.setItem("userID", takeItForStore.id);
     // console.log(localStorage.getItem("userID") )
     // localStorage.setItem("userName", inputName);
-    console.log( 'tweet', tweet )
+    // console.log( 'tweet', tweet )
 
     // save to locallist
     setPrevTweets([tweet, ...prevTweets]);
   };
+
+
+ 
+
 
   useEffect(() => {
     handleSubmit();
@@ -59,8 +71,9 @@ function Home({}) {
       const takeItForStore = await addDoc(collection(db, `tweets`), tweet);
       const tweetWithIdFromServer = { ...tweet, id: takeItForStore.id };
       
-      console.log(takeItForStore);
-       console.log(tweetWithIdFromServer);
+       console.log(takeItForStore);
+        console.log(tweetWithIdFromServer);
+      
     } catch (err) {
       console.log(err);
     }

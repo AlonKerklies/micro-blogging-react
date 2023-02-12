@@ -29,8 +29,11 @@ function NoteList() {
         orderBy("date", "desc"),
         limit(11)
       );
+
+
+    
+    // console.log(tweetsCollectionFromDB,);
       const allNotesSnapShot = await getDocs(q);
-      ///////////////////////////////////
       const allNotes = allNotesSnapShot.docs.map((tmpName) => {
         const newNoteWithId = { ...tmpName.data(), id: tmpName.id };
 
@@ -38,10 +41,71 @@ function NoteList() {
       });
 
       setNoteListFromServer(allNotes);
+      // console.log('allNotes',allNotes);
+      // console.log( allNotes[0] );
+
+
+      
+      
     } catch (err) {
       console.log(err);
     }
   };
+ 
+
+
+
+
+/////////////// users //////////////////////////
+// const usersnFromDB = collection(db, `users`);
+ 
+// const getAllUsers = async () => {
+//   try {
+//     const q = query(
+//       usersnFromDB,
+//       // orderBy("date", "desc")
+//     );
+
+//     const allUsersSnapShot = await getDocs(q);
+//     const allUsers = allUsersSnapShot.docs
+  
+//     .map((tmpName) => {
+//       const newNoteWithId = { ...tmpName.data(), id: tmpName.id };
+// console.log(allUsersSnapShot);
+//       return newNoteWithId;
+//     });
+
+    // setNoteListFromServer(allNotes);
+    // console.log('allNotes',allNotes);
+    // console.log( allNotes[0] );
+
+    
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+    
+// useEffect(() => {
+//   const interval = setInterval(() => {
+//     getAllUsers();
+//   }, 3000);
+//   //  return () => clearInterval(interval);
+// }, []);
+
+
+
+///////////////////
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,7 +125,7 @@ function NoteList() {
             <p className="pe-2">{ttt.userName}</p>
           </div>
           <p className="color-white">{ttt.content}</p>
-          <p className="note-date  "> Created at: {ttt.date} </p>
+          <p className="note-date  "> Created at: {ttt.previewDate} </p>
         </div>
       ))}
     </>
